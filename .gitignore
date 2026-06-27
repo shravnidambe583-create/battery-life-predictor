@@ -1,0 +1,19 @@
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Python
+backend/__pycache__/
+backend/*.pyc
+backend/.pytest_cache/
+backend/history.json
+
+# Local tools and OS
+.gemini/
+.agents/
+.system_generated/
+.DS_Store
+thumbs.db
+powershell.bat
+frontend/powershell.bat
