@@ -1,0 +1,9 @@
+{
+  "name": "voltpredict-ai-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "cd frontend && npm install",
+    "build": "cd frontend && npm run build && cp -r dist ../dist"
+  }
+}
