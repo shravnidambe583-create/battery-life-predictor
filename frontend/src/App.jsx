@@ -7,6 +7,10 @@ import {
 } from 'lucide-react';
 import { ResponsiveContainer, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceDot, Line, ComposedChart } from 'recharts';
 
+const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:5001'
+  : '';
+
 export default function App() {
   // App States
   const [loading, setLoading] = useState(true);
@@ -90,7 +94,7 @@ export default function App() {
   // --- 3. API Handlers ---
   const fetchStats = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/stats');
+      const response = await fetch(`${API_BASE}/api/stats`);
       const data = await response.json();
       if (data.success) {
         setModelStats(data);
@@ -102,7 +106,7 @@ export default function App() {
 
   const fetchChartData = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/chart-data');
+      const response = await fetch(`${API_BASE}/api/chart-data`);
       const data = await response.json();
       if (data.success) {
         setScatterData(data.scatter);
@@ -122,7 +126,7 @@ export default function App() {
     setPredicting(true);
     
     try {
-      const response = await fetch('http://localhost:5001/api/predict', {
+      const response = await fetch(`${API_BASE}/api/predict`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ screen_time_hours: val })
@@ -239,7 +243,7 @@ export default function App() {
     setBotTyping(true);
     
     try {
-      const response = await fetch('http://localhost:5001/api/chat', {
+      const response = await fetch(`${API_BASE}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: userQuery })
@@ -295,7 +299,7 @@ export default function App() {
         current: prediction
       };
       
-      const response = await fetch('http://localhost:5001/api/export-pdf', {
+      const response = await fetch(`${API_BASE}/api/export-pdf`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
